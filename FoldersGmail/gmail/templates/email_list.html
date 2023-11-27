@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <h1>Email List</h1>
+    <ul>
+        {% for email in emails %}
+            <li>
+                <p>================================================================</p>
+                <strong>From:</strong> {{ email.payload.headers.17.value }} <br>
+                <strong>Subject:</strong> {{ email.payload.headers.16.value }} <br>
+                <strong>Snippet:</strong> {{ email.snippet }} <br>
+                <p>================================================================</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
