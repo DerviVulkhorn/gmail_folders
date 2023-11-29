@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block content %}
+<body>
+{% for word in words %}
+    <ul class="list-group">
+        <li class="list-group-item">{{word.words}}</li>
+    </ul>
+{% endfor %}
+</body>
+{% endblock %}

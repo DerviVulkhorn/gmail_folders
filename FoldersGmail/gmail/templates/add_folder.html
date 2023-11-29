@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block content %}
+<form method="post" action="{% url 'add_folder' %}">
+    <p>You can enter several words separated by commas. (Word 1, word2, ...)</p>
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">Create folder</button>
+</form>
+    <p class="text-danger-emphasis">{{ err_mess }}</p>
+{% endblock %}

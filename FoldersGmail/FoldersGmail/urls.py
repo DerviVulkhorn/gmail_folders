@@ -16,13 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from FoldersGmail.main_page.views import info, main, about
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('gmail/', include('gmail.urls')),
-    path('', main, name='main'),
-    path('info/', info, name='info'),
-    path('/about', about, name='about')
+    path('', include('main_page.urls'))
 ]

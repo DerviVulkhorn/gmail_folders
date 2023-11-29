@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% block content %}
+<button type="button"  class="btn btn-success m-1" onclick="location.href='{% url 'add_folder' %}'">
+    New folder
+</button>
+
+{% for folder in folders %}
+<div class="card">
+  <div class="card-header">
+      Folder: {{folder.title}}
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{folder.discription}}</p>
+    <a href="#" onclick="location.href='{% url 'open_folder' folder.id %}'" class="btn btn-primary">Open folder</a>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
