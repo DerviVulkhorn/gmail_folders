@@ -1,5 +1,8 @@
+import base64
+import email
 import os.path
 
+from google.auth.exceptions import RefreshError
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -19,7 +22,10 @@ def gmail_auth():
 
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            try:
+                creds.refresh(Request())
+            except RefreshError:
+                print(RefreshError)
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 "FoldersGmail/credentials.json", SCOPES
@@ -48,3 +54,19 @@ def get_users():
         save_usr = Users.objects.create(login=f'{email}')
         print(f"Пользователь {save_usr} добавлен")
         return save_usr
+
+def get_message_text(message_id):
+
+    message = gmail_auth().users().messages().get(userId='me', id=message_id, format='full').execute()
+
+    message_payload = message['payload']
+    parts = message_payload.get('parts', [])
+    message_text = ""
+
+    for part in parts:
+        if part['mimeType'] == 'text/plain':
+            data = part['body']['data']
+            data = base64.urlsafe_b64decode(data)
+            message_text += data.decode('utf-8')
+
+    return message_text

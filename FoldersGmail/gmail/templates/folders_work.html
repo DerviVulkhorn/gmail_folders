@@ -12,6 +12,7 @@
   <div class="card-body">
     <p class="card-text">{{folder.discription}}</p>
     <a href="#" onclick="location.href='{% url 'open_folder' folder.id %}'" class="btn btn-primary">Open folder</a>
+      <button type="button" onclick="location.href='{% url 'del_folder' folder.id %}'" class="btn btn-danger">Delet</button>
   </div>
 </div>
 {% endfor %}

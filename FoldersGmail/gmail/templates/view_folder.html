@@ -1,10 +1,21 @@
 {% extends 'main.html' %}
 {% block content %}
 <body>
-{% for word in words %}
+<button type="button" class="btn btn-primary" onclick="location.href='{% url 'folders_work' %}'">Back</button>
+<p class="font-monospace">Your selected words</p>
+<ul class="list-group list-group-horizontal">
+    {% for word in arr_words %}
+  <li class="list-group-item">{{word.words}}</li>
+    {% endfor %}
+</ul>
+
+<p class="font-monospace">Your sort messages</p>
     <ul class="list-group">
-        <li class="list-group-item">{{word.words}}</li>
+        {% for sort in sorted_mess %}
+        <li class="list-group-item">{{sort}}</li>
+        {% endfor %}
     </ul>
-{% endfor %}
+
 </body>
+
 {% endblock %}
